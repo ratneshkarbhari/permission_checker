@@ -136,8 +136,7 @@ a:hover{
   }
 main {
   height: 100vh;
-  height: -webkit-fill-available;
-  max-height: 100vh;
+  height: -webkit-fill-available; 
   overflow-x: auto;
   overflow-y: hidden;
 }
@@ -193,8 +192,7 @@ main {
   overflow-y: auto;
 }
 .sidebar {
-    min-height: calc(100vh - 110px);
-    max-height: 90vh;
+    min-height: calc(100vh - 110px); 
 }
 
 

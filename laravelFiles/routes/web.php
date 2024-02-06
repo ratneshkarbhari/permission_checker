@@ -28,3 +28,5 @@ Route::get("/reset-channels",[PageLoader::class,'reset']);
 Route::get("/see-titles/{channelId}",[PageLoader::class,'see_titles']);
 
 Route::get("import-managers",[DataController::class,'channel_managers_import']);
+
+Route::get("logout",[Authentication::class,'logout']);

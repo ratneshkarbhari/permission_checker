@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Manager;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class Authentication extends Controller
 {
+
+    function logout() {
+        
+        Session::flush();
+
+        return redirect()->to(url("user-login"));
+
+    }
     
     function user_login(Request $request){
         

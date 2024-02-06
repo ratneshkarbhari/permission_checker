@@ -191,7 +191,7 @@
                     My Account
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Log Out</a></li>
+                    <li><a class="dropdown-item" href="{{url('logout')}}">Log Out</a></li>
                 </ul>
             </li>
             <li class="nav-item text-nowrap d-md-none">
