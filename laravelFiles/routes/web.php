@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Authentication;
 use App\Http\Controllers\PageLoader;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataController;
@@ -15,8 +16,15 @@ use App\Http\Controllers\DataController;
 |
 */
 
-Route::get('/', [PageLoader::class,'index']);
+Route::post("user-login-exe",[Authentication::class,'user_login']);
+
+Route::get("/",[PageLoader::class,'user_dashboard']);
+Route::get("user-login",[PageLoader::class,'user_login']);
+
+Route::get('upload-monthly-data', [PageLoader::class,'upload_monthly_data']);
 Route::post("upload-data-exe",[DataController::class,'upload']);
 
 Route::get("/reset-channels",[PageLoader::class,'reset']);
 Route::get("/see-titles/{channelId}",[PageLoader::class,'see_titles']);
+
+Route::get("import-managers",[DataController::class,'channel_managers_import']);

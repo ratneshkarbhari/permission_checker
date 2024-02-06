@@ -4,11 +4,51 @@ namespace App\Http\Controllers;
 
 use App\Models\Channel;
 use App\Models\ChannelPermission;
+use App\Models\Manager;
 use App\Models\Title;
 use Illuminate\Http\Request;
 
 class DataController extends Controller
 {
+
+    function channel_managers_import(){
+        
+        $path = "./assets/uploads/channel_managers.csv";
+
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($path);
+
+        $allData = $spreadsheet->getActiveSheet()->toArray();
+
+        unset($allData[0]);
+
+        foreach($allData as $managerDataPoint){
+
+            $name = $managerDataPoint[1];
+
+            $group = $managerDataPoint[2];
+    
+            $email = $managerDataPoint[3];
+    
+            $password = NULL;
+    
+            $managerObj = [
+                "name" => $name,
+                "email" => $email,
+                "password" => $password,
+                "group_code"=> $group
+            ];
+    
+            if($managerData = Manager::where("email",$email)->first()){
+                $managerData->update($managerObj);
+            }else{
+                Manager::insert($managerObj);
+            }
+    
+
+        }
+
+
+    }
     
     function upload(Request $request) {
         
@@ -26,72 +66,80 @@ class DataController extends Controller
 
             $allData = $spreadsheet->getActiveSheet()->toArray();
     
-            $keys = $allData[0];
 
             unset($allData[0]);
 
-            $titleChannelPermissionObj = [];
 
-            foreach($allData as $titleDataPoint){
+            $chunks = array_chunk($allData,200);
 
-                $title = $titleDataPoint[1];
-                $cast = $titleDataPoint[2];
-                $yearOfRelease = $titleDataPoint[3];
-                $language = $titleDataPoint[4];
-                $lot = $titleDataPoint[5];
-                $fullMovie = $titleDataPoint[6];
-                $scene = $titleDataPoint[7];
-                $song = $titleDataPoint[8];
-    
-                $titleObj = [
-                    "name" => $title,
-                    "cast" => $cast,
-                    "yor" => $yearOfRelease,
-                    "language" => $language,
-                    "lot" => $lot,
-                    "full_movie" => $fullMovie,
-                    "scene" => $scene,
-                    "song" => $song
-                ];
+            foreach($chunks as $chunk){
 
-                $titleData = Title::where("name",$titleDataPoint[1])->first();
+                $titleMasterObj = [];
 
-                if($titleData==null){
+                $titleChannelPermissionMasterObj = [];
 
-                    $titleId = Title::insertGetId($titleObj);
+                foreach($chunk as $titleDataPoint){
 
-                }else{
-
-                    $titleId = $titleData["id"];
-                
-                }
-                
-
-                $titleChannelPermissionEntity = [];
+                    $title = $titleDataPoint[1];
+                    $cast = $titleDataPoint[2];
+                    $yearOfRelease = $titleDataPoint[3];
+                    $language = $titleDataPoint[4];
+                    $lot = $titleDataPoint[5];
+                    $grading = $titleDataPoint[6];
+                    $fullMovie = $titleDataPoint[7];
+                    $scene = $titleDataPoint[8];
+                    $song = $titleDataPoint[9];
+        
+                    $titleObj = [
+                        "name" => $title,
+                        "cast" => $cast,
+                        "yor" => $yearOfRelease,
+                        "language" => $language,
+                        "lot" => $lot,
+                        "grading" => $grading,
+                        "full_movie" => $fullMovie,
+                        "scene" => $scene,
+                        "song" => $song
+                    ];
 
 
-                for ($i=9; $i < 69; $i++) { 
+                    $titleMasterObj[] = $titleObj;
 
-                    if($titleDataPoint[$i]=="YES"){
-
-                        $titleChannelPermissionEntity = [
-                            "channel_id" => $i-8,
-                            "title_id" => $titleId,
-                        ];
-    
-                        $titleChannelPermissionObj[] = $titleChannelPermissionEntity;
-    
-    
-
-                    }
                     
+    
+    
+    
+                    for ($i=10; $i < 69; $i++) { 
+    
+                        if($titleDataPoint[$i]=="YES"){
+    
+                            $titleChannelPermissionEntity = [
+                                "channel_id" => $i-9,
+                                "title_id" => $titleDataPoint[0],
+                            ];
+        
+                            $titleChannelPermissionMasterObj[] = $titleChannelPermissionEntity;    
 
+    
+                        }
+                        
+    
+                    }
+
+    
+                    
+    
+    
+    
                 }
 
+                // dd($titleMasterObj);
+
+                // dd($titleChannelPermissionMasterObj);
 
 
-                ChannelPermission::insert($titleChannelPermissionObj);
-
+                Title::insert($titleMasterObj);
+                ChannelPermission::insert($titleChannelPermissionMasterObj);
 
 
             }
