@@ -1,6 +1,6 @@
 <main class="page-content col-md-9 col-lg-10 mt-5">
   <div class="container">
-    <h4 class="heading-1 mb-4">Titles for channel</h4>
+    <h4 class="heading-1 mb-4">Titles for {{$channel['name']}}</h4>
     <div class="table-responsive">
   <table class="table DataTable bordered ">
   <thead>

@@ -226,9 +226,9 @@
                             <li class="">
                                 <a href="{{ url('/') }}" class="">Dashboard</a>
                             </li>
-                            <!-- <li class="">
-                                <a href="{{ url('monthly-report') }}" class="">Monthly Total Report</a>
-                            </li> -->
+                            <li class="">
+                                <a class="bg-danger" href="{{ url('logout') }}" class="">Logout</a>
+                            </li>
 
                             <!-- <li class="">
                                 <button class="btn btn-toggle d-inline-flex align-items-center rounded-0 border-0"

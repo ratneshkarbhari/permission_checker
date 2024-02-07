@@ -28,10 +28,10 @@
 <script> 
 $(document).ready(function() {
     $('.DataTable').DataTable( {
-        dom: 'lBfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
+        // dom: 'lBfrtip',
+        // buttons: [
+        //     'copy', 'csv', 'excel', 'pdf', 'print'
+        // ]
     } );
 } );
 </script>

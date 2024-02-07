@@ -30,6 +30,7 @@ class PageLoader extends Controller
         
         $channels = Channel::where("manager",session("manager_id"))->get();
         
+
         $this->page_loader("manager_channels",[
             "title" => "Your Channels",
             "channels" => $channels
@@ -66,7 +67,8 @@ class PageLoader extends Controller
             // dd($titles);
             $this->page_loader("channel_permitted_titles",[
                 "title" => "Titles allowed for channel",
-                "allowed_titles" => $titles
+                "allowed_titles" => $titles,
+                "channel"=>$channel
             ]);
 
 
