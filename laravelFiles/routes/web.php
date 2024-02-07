@@ -16,19 +16,23 @@ use App\Http\Controllers\DataController;
 |
 */
 
-Route::post("user-login-exe",[Authentication::class,'user_login']);
 
-Route::get("/",[PageLoader::class,'user_dashboard']);
-Route::get("user-login",[PageLoader::class,'user_login']);
 
-Route::get('upload-monthly-data', [PageLoader::class,'upload_monthly_data']);
-Route::post("upload-data-exe",[DataController::class,'upload']);
+Route::group(['middleware' => ['ip_checker']], function () {
+    Route::post("user-login-exe",[Authentication::class,'user_login']);
 
-Route::get("/reset-channels",[PageLoader::class,'reset']);
-Route::get("/see-titles/{channelId}",[PageLoader::class,'see_titles']);
-
-Route::get("import-managers",[DataController::class,'channel_managers_import']);
-
-Route::get("logout",[Authentication::class,'logout']);
-
-Route::get("set-password",[Authentication::class,'set_password']);
+    Route::get("/",[PageLoader::class,'user_dashboard']);
+    Route::get("user-login",[PageLoader::class,'user_login']);
+    
+    Route::get('upload-monthly-data', [PageLoader::class,'upload_monthly_data']);
+    Route::post("upload-data-exe",[DataController::class,'upload']);
+    
+    Route::get("/reset-channels",[PageLoader::class,'reset']);
+    Route::get("/see-titles/{channelId}",[PageLoader::class,'see_titles']);
+    
+    Route::get("import-managers",[DataController::class,'channel_managers_import']);
+    
+    Route::get("logout",[Authentication::class,'logout']);
+    
+    Route::get("set-password",[Authentication::class,'set_password']);
+});

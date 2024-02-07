@@ -40,6 +40,7 @@ class PageLoader extends Controller
 
     function user_login(){
 
+
         $this->page_loader("user_login",[
             "title" => "User Login"
         ]);

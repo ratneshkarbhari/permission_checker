@@ -1,5 +1,5 @@
 <main class="page-container col-md-9 col-lg-10 mt-5">
-    <div class="container">
+    <div class="container-fluid">
         <h3 style="margin-bottom: 2em;">Welcome {{ session('name') }}</h3>
         <div class="row">
             @foreach($channels as $channel)
