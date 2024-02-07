@@ -188,7 +188,7 @@
         <ul class="navbar-nav flex-row">
             <li class="nav-item dropdown me-2">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                    My Account
+                    {{session('name')}}
                 </a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="{{url('logout')}}">Log Out</a></li>
