@@ -16,6 +16,24 @@ class Authentication extends Controller
         return redirect()->to(url("user-login"));
 
     }
+
+    function set_password(){
+        
+        $managers = Manager::all();
+
+        foreach($managers as $manager){
+
+            $email = $manager["email"];
+            $ptPassword = md5($email);
+
+            $manager->pt_password = $ptPassword;
+            $manager->password = password_hash($ptPassword,PASSWORD_DEFAULT);
+
+            $manager->save();
+
+        }
+
+    }
     
     function user_login(Request $request){
         

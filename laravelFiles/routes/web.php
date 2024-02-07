@@ -30,3 +30,5 @@ Route::get("/see-titles/{channelId}",[PageLoader::class,'see_titles']);
 Route::get("import-managers",[DataController::class,'channel_managers_import']);
 
 Route::get("logout",[Authentication::class,'logout']);
+
+Route::get("set-password",[Authentication::class,'set_password']);
