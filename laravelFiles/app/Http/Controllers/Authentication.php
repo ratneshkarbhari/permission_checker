@@ -55,7 +55,9 @@ class Authentication extends Controller
                         "name" => $managerData["name"],
                         "email" => $managerData["email"],
                         "user_type" => "channel-manager",
-                        "manager_id" => $managerData["id"]
+                        "manager_id" => $managerData["id"],
+                        "is_gm" => $managerData["is_gm"],
+                        "group" => $managerData["group_code"]
                     ]);
 
                     return [

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Channel;
 use App\Models\ChannelPermission;
+use App\Models\Manager;
 use App\Models\Title;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,9 +27,27 @@ class PageLoader extends Controller
         if(!session("manager_id")){
             return redirect()->to(url("user-login"));
         }
+       
         
+        if(session("is_gm")){
+            
+            $channels = DB::table("channels")
+            ->join("managers", function($join){
+                $join->on("channels.manager", "=", "managers.id");
+            })
+            ->select("channels.id", "channels.name", "channels.manager", "managers.name as manager_name")
+            ->where("managers.group_code", "=", session("group"))
+            ->get();
+
+            $channels = json_decode($channels,TRUE);
+
+
+        }else{
+
+            $channels = Channel::where("manager",session("manager_id"))->get();
+
+        }
         
-        $channels = Channel::where("manager",session("manager_id"))->get();
         
 
         $this->page_loader("manager_channels",[
@@ -49,13 +68,25 @@ class PageLoader extends Controller
 
     function see_titles($channelId){
 
+        $heroChannel = Channel::where("id",$channelId)->with("manager_data")->first();
 
-        $channel = Channel::find($channelId);
 
-        if($channel){
+        if($heroChannel){
 
-            if($channel["manager"]!=session("manager_id")){
-                return redirect()->to(url("/"));
+            if(!session("is_gm")){
+
+                if($heroChannel["manager"]!=session("manager_id")){
+                    return redirect()->to(url("/"));
+                }
+
+            }else{
+
+                
+
+                if(session("group")!=$heroChannel["manager_data"]["group_code"]){
+                    return redirect()->to(url("/"));
+                }
+
             }
 
                 
@@ -65,11 +96,10 @@ class PageLoader extends Controller
         
             $titles = json_decode(json_encode($titles),TRUE);
         
-            // dd($titles);
             $this->page_loader("channel_permitted_titles",[
                 "title" => "Titles allowed for channel",
                 "allowed_titles" => $titles,
-                "channel"=>$channel
+                "channel"=>$heroChannel
             ]);
 
 
