@@ -4,6 +4,7 @@ use App\Http\Controllers\Authentication;
 use App\Http\Controllers\PageLoader;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataController;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageBreak;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +36,10 @@ Route::group(['middleware' => ['ip_checker']], function () {
     Route::get("logout",[Authentication::class,'logout']);
     
     Route::get("set-password",[Authentication::class,'set_password']);
+
+    Route::get("manage-channels",[PageLoader::class,'manage_channels']);
+
+
+    Route::get("manage-titles",[PageLoader::class,'manage_titles']);
+
 });

@@ -223,12 +223,25 @@
                     </div>
                     <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                         <ul class="list-unstyled ps-0">
+                            @if(session("user_type")!="rights-admin")
                             <li class="">
                                 <a href="{{ url('/') }}" class="">Dashboard</a>
                             </li>
+                            @else
+                            <li class="">
+                                <a href="{{ url('manage-channels') }}" class="">Channels</a>
+                            </li>
+                            <li class="">
+                                <a href="{{ url('manage-titles') }}" class="">Titles</a>
+                            </li>   
+                            <li class="">
+                                <a href="{{ url('manage-managers') }}" class="">Managers</a>
+                            </li>                          
+                            @endif
                             <li class="">
                                 <a class="bg-danger" href="{{ url('logout') }}" class="">Logout</a>
                             </li>
+                           
 
                             <!-- <li class="">
                                 <button class="btn btn-toggle d-inline-flex align-items-center rounded-0 border-0"
