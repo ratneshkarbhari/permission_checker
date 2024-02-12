@@ -1,6 +1,6 @@
-<main class="page-container col-md-9 col-lg-10 mt-5">
+<main class="page-container col-md-9 col-lg-10 mt-4">
     <div class="container-fluid">
-        <h3 style="margin-bottom: 2em;">Welcome {{ session('name') }}</h3>
+        <h3 class="mb-3">Welcome {{ session('name') }}</h3>
         @if(session("is_gm"))
         <p>Your own and your group member channels are below. Where your channels are marked in green.</p>
         @endif
@@ -15,8 +15,8 @@
                     @endif
                     @endif
                     ">
-                    <div class="card-body">
-                        <h4 class="mb-0">{{$channel["name"]}}</h4>
+                    <div class="card-body p-2" style="min-height: 64px;">
+                        <h5 class="mb-0">{{$channel["name"]}}</h4>
                         @if($channel['manager'] != session('manager_id'))
                         <small>{{$channel['manager_name']}}</small>
                         @endif
