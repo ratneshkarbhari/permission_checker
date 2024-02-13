@@ -57,12 +57,12 @@ class PageLoader extends Controller
                 "channels" => $channels
             ]);
 
-        }else{
-
+        }elseif (session("user_type")=="channel-manager") {
             $this->page_loader("dashboard",[
                 "title" => "Titles allowed for channel",
             ]);
-
+        }else{
+            return redirect()->to(url("user-login"));
         }
        
         
