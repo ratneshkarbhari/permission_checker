@@ -70,7 +70,23 @@ class DataController extends Controller
             unset($allData[0]);
 
 
+
+
             $chunks = array_chunk($allData,200);
+
+            $existingTitles = Title::all();
+
+            $existingTitlePermForChannel = ChannelPermission::all();
+
+            $existingTitleNames = [];
+
+            foreach($existingTitles as $existingTitle){
+
+                $existingTitleNames[] = $existingTitle["name"];
+
+            }
+
+
 
             foreach($chunks as $chunk){
 
@@ -102,14 +118,15 @@ class DataController extends Controller
                         "song" => $song
                     ];
 
+                    if(!in_array($title,$existingTitleNames)){
 
-                    $titleMasterObj[] = $titleObj;
+                        $titleMasterObj[] = $titleObj;
 
-                    
+
+                    }
+
     
-    
-    
-                    for ($i=10; $i < 69; $i++) { 
+                    for ($i=10; $i < 70; $i++) { 
     
                         if($titleDataPoint[$i]=="YES"){
     
@@ -118,6 +135,7 @@ class DataController extends Controller
                                 "title_id" => $titleDataPoint[0],
                             ];
         
+
                             $titleChannelPermissionMasterObj[] = $titleChannelPermissionEntity;    
 
     
@@ -132,11 +150,6 @@ class DataController extends Controller
     
     
                 }
-
-                // dd($titleMasterObj);
-
-                // dd($titleChannelPermissionMasterObj);
-
 
                 Title::insert($titleMasterObj);
                 ChannelPermission::insert($titleChannelPermissionMasterObj);

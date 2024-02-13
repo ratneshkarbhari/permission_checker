@@ -20,7 +20,10 @@ class PageLoader extends Controller
 
 
     function upload_monthly_data(){
-        $this->page_loader("upload_monthly_data",["title"=>"Upload Monthly Data"]);
+        if(session("user_type")=="rights-admin"){
+            $this->page_loader("upload_monthly_data",["title"=>"Upload Monthly Data"]);
+        }
+
     }
 
     function user_dashboard() {
@@ -57,12 +60,12 @@ class PageLoader extends Controller
                 "channels" => $channels
             ]);
 
-        }elseif (session("user_type")=="channel-manager") {
+        }elseif(session("user_type")=="rights-admin"){
             $this->page_loader("dashboard",[
-                "title" => "Titles allowed for channel",
+                "title" => "Rights Admin",
             ]);
-        }else{
-            return redirect()->to(url("user-login"));
+
+            
         }
        
         
