@@ -20,9 +20,9 @@ class PageLoader extends Controller
 
 
     function upload_monthly_data(){
-        if(session("user_type")=="rights-admin"){
+        // if(session("user_type")=="rights-admin"){
             $this->page_loader("upload_monthly_data",["title"=>"Upload Monthly Data"]);
-        }
+        // }
 
     }
 
@@ -66,7 +66,10 @@ class PageLoader extends Controller
             ]);
 
             
+        }else{
+            return redirect()->to(url("user-login"));
         }
+
        
         
         
