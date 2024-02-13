@@ -7,6 +7,7 @@ use App\Models\ChannelPermission;
 use App\Models\Manager;
 use App\Models\Title;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class PageLoader extends Controller
@@ -130,13 +131,18 @@ class PageLoader extends Controller
 
             }
 
+            if(!$titles = Cache::get("channel-".$channelId)){
+                $query = 'select DISTINCT t.name,t.full_movie,t.scene,t.song,t.grading,t.lot,t.language,t.yor,t.cast from titles t, channel_permissions cp, channels c where t.id = cp.title_id and cp.channel_id = '.$channelId;
+        
+                $titles = DB::select($query);
+            
+                $titles = json_decode(json_encode($titles),TRUE);
+            }
                 
-            $query = 'select DISTINCT t.name,t.full_movie,t.scene,t.song,t.grading,t.lot,t.language,t.yor,t.cast from titles t, channel_permissions cp, channels c where t.id = cp.title_id and cp.channel_id = '.$channelId;
-        
-            $titles = DB::select($query);
-        
-            $titles = json_decode(json_encode($titles),TRUE);
-        
+
+       
+
+            
             $this->page_loader("channel_permitted_titles",[
                 "title" => "Titles allowed for channel",
                 "allowed_titles" => $titles,
