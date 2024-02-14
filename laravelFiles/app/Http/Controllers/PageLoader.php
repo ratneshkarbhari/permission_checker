@@ -108,6 +108,22 @@ class PageLoader extends Controller
 
     }
 
+    function manage_managers() {
+        
+        if(session("user_type")!="rights-admin"){
+            return redirect()->to(url('/'));
+        }
+
+        $allManagers = Manager::all();
+
+        $this->page_loader("manage_managers",[
+            "title" => "All Managers",
+            "managers" => $allManagers
+        ]);
+
+
+    }
+
     function see_titles($channelId){
 
         $heroChannel = Channel::where("id",$channelId)->with("manager_data")->first();

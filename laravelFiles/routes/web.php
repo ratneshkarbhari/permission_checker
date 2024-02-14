@@ -39,6 +39,7 @@ Route::group(['middleware' => ['ip_checker']], function () {
 
     Route::get("manage-channels",[PageLoader::class,'manage_channels']);
 
+    Route::get("manage-managers",[PageLoader::class,'manage_managers']);
 
     Route::get("manage-titles",[PageLoader::class,'manage_titles']);
 
