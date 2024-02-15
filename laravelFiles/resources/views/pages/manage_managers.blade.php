@@ -20,9 +20,6 @@
 
                         <td>
                             <a href="{{url('edit-title/'.$manager['id'])}}" class="btn btn-secondary">Edit</a>
-                            <form class="d-inline" action="" method="post">
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
                         </td>
                         
                     </tr>   

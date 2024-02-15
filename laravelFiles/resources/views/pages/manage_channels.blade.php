@@ -5,6 +5,7 @@
             <table class="table DataTable bordered ">
                 <thead>
                     <tr>
+                        <th>Id</th>
                         <th>Name</th>
                         <th>YouTube Id</th>
                         <th>Manager</th>
@@ -16,14 +17,15 @@
 
                     @foreach($channels as $channel)
                     <tr>
+                        <td>{{$channel['id']}}</td>
                         <td>{{$channel["name"]}}</td>
                         <td>{{$channel["yt_id"]}}</td>
                         <td><a href="{{url('manager-details/'.$channel['manager_data']['id'])}}">{{$channel["manager_data"]["name"]}}</a></td>
                         <td>
                             <a href="#" class="btn btn-secondary">Edit</a>
-                            <form class="d-inline" action="" method="post">
+                            <!-- <form class="d-inline" action="" method="post">
                                 <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
+                            </form> -->
                         </td>
                     </tr>
                     @endforeach
