@@ -36,7 +36,7 @@
                         <td>{{$title["cast"]}}</td>
                         <td>{{$title["yor"]}}</td>
                         <td>
-                            <a href="#" class="btn btn-secondary">Edit</a>
+                            <a href="{{url('edit-title/'.$title['id'])}}" class="btn btn-secondary">Edit</a>
                             <form class="d-inline" action="" method="post">
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>

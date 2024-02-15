@@ -31,9 +31,6 @@ class PageLoader extends Controller
 
         if(in_array(session("user_type"),['channel-manager','group-manager'])){
 
-            if(!session("manager_id")){
-                return redirect()->to(url("user-login"));
-            }
 
             if(session("is_gm")){
             
@@ -77,6 +74,33 @@ class PageLoader extends Controller
 
     }
 
+    function edit_title($id) {
+        
+        $titleData = Title::find($id);
+
+        $allChannels = Channel::all();
+
+
+        $queryToGetChannelIds = 'SELECT GROUP_CONCAT(channel_id) as id FROM `channel_permissions` WHERE title_id = 29';
+
+        $cidsWRights = DB::select($queryToGetChannelIds);
+            
+        $cidsWRights = json_decode(json_encode($cidsWRights),TRUE);
+
+
+
+        $cidsWRights = explode(",",$cidsWRights[0]["id"]);
+
+
+        $this->page_loader("edit_title",[
+            "title" => "Edit Title : ".$titleData["name"],
+            "titleData" => $titleData,
+            "channels" => $allChannels,
+            "channel_ids_with_rights" => $cidsWRights
+        ]);
+
+    }
+
     function manage_channels() {
         
         $channels = Channel::with("manager_data")->get();
@@ -110,9 +134,6 @@ class PageLoader extends Controller
 
     function manage_managers() {
         
-        if(session("user_type")!="rights-admin"){
-            return redirect()->to(url('/'));
-        }
 
         $allManagers = Manager::all();
 
