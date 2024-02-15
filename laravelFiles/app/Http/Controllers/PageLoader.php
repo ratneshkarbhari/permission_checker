@@ -74,6 +74,21 @@ class PageLoader extends Controller
 
     }
 
+    function add_new_title() {
+
+
+        $allChannels = Channel::all();
+
+        
+        $this->page_loader("add_new_title",[
+            "title" => "Add new Title",
+            "channels" => $allChannels,
+        ]);
+
+
+    }
+    
+
     function edit_title($id) {
         
         $titleData = Title::find($id);
@@ -81,7 +96,7 @@ class PageLoader extends Controller
         $allChannels = Channel::all();
 
 
-        $queryToGetChannelIds = 'SELECT GROUP_CONCAT(channel_id) as id FROM `channel_permissions` WHERE title_id = 29';
+        $queryToGetChannelIds = 'SELECT GROUP_CONCAT(channel_id) as id FROM `channel_permissions` WHERE title_id = '.$id;
 
         $cidsWRights = DB::select($queryToGetChannelIds);
             
@@ -90,6 +105,7 @@ class PageLoader extends Controller
 
 
         $cidsWRights = explode(",",$cidsWRights[0]["id"]);
+
 
 
         $this->page_loader("edit_title",[

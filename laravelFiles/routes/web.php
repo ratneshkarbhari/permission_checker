@@ -51,7 +51,13 @@ Route::group(['middleware' => ['ip_checker']], function () {
         Route::get("edit-title/{id}",[PageLoader::class,'edit_title']);
 
         Route::post("update-title-exe",[Titles::class,'update']);
-    
+
+        Route::get("add-new-title",[PageLoader::class,'add_new_title']);
+   
+        Route::post("create-title-exe",[Titles::class,'create']);
+
+
+        
     });
 
 

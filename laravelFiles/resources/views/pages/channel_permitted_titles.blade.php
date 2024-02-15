@@ -24,12 +24,13 @@
             <td>{{$allowed_title["name"]}}</td>
             
 
-            <td><span style="padding: 0.3em;" class="@if($allowed_title['full_movie']=='YES') bg-success @else bg-danger @endif">{{$allowed_title["full_movie"]}}</span></td>
+            <td><span style="padding: 0.3em;" class="@if($allowed_title['full_movie']=='YES') bg-success @else bg-danger @endif">
+            @if($allowed_title["full_movie"]){{$allowed_title["full_movie"]}} @else NO @endif</span></td>
 
 
-            <td><span style="padding: 0.3em;" class="@if($allowed_title['scene']=='YES') bg-success @else bg-danger @endif">{{$allowed_title["scene"]}}</span></td>
+            <td><span style="padding: 0.3em;" class="@if($allowed_title['scene']=='YES') bg-success @else bg-danger @endif">@if($allowed_title["scene"]){{$allowed_title["scene"]}} @else NO @endif</span></td>
             
-            <td><span style="padding: 0.3em;" class="@if($allowed_title['song']=='YES') bg-success @else bg-danger @endif">{{$allowed_title["song"]}}</span></td>
+            <td><span style="padding: 0.3em;" class="@if($allowed_title['song']=='YES') bg-success @else bg-danger @endif">@if($allowed_title["song"]){{$allowed_title["song"]}} @else NO @endif</span></td>
             
             <td>{{$allowed_title["grading"]}}</td>
             <td>{{$allowed_title["lot"]}}</td>
