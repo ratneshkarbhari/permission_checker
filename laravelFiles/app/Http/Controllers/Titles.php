@@ -21,7 +21,7 @@ class Titles extends Controller
             "language" => $request->language,
             "lot" => $request->lot,
             "grading" => $request->grading,
-            "full_movie" => $request->fullMovie,
+            "full_movie" => $request->full_movie,
             "scene" => $request->scene,
             "song" => $request->song
         ];

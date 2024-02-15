@@ -134,6 +134,37 @@
 
     </div>
 </main>
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 999">
+        <div id="liveToast " class="toast bg-success text-white title-update-success position-relative fade hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <strong class="me-auto"><i class="fas fa-check-circle"></i> Success</strong>
+                <small>Just Now</small>
+                
+            </div>
+            <div class="toast-body">
+                Title updated successfully
+            </div>
+            <div class="toast-timeline animate"></div>
+        </div>
+    </div>
+
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 999">
+        <div id="liveToast " class="toast hide bg-danger text-white title-update-failure position-relative" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-danger text-white">
+                <strong class="me-auto"><i class="fas fa-check-circle"></i> Failure</strong>
+                <small>Just Now</small>
+                
+            </div>
+            <div class="toast-body">
+
+                Title update failed
+            
+            </div>
+            <div class="toast-timeline animate"></div>
+        </div>
+    </div>
+
 <script>
     $("form#updateTitleForm").submit(function (e) { 
         e.preventDefault();
@@ -147,10 +178,12 @@
             success: function (response) {
                 if(response.result=="success"){
 
-                    $("p#success-message").html("Title updated");
+
+                    $(".title-update-success").toast("show");
+                    
 
                 }else{
-                    $("p#error-message").html("Title update failed");
+                    $(".title-update-failure").toast("show");
                 }
             }
         });
