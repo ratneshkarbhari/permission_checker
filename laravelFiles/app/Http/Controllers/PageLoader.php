@@ -87,6 +87,17 @@ class PageLoader extends Controller
 
 
     }
+
+    function edit_channel($id){
+        
+        $channelData = Channel::find($id);
+
+        $this->page_loader("edit_channel",[
+            "title" => "Edit channel : ".$channelData['name'],
+            "channel" => $channelData
+        ]);
+
+    }
     
 
     function edit_title($id) {
@@ -113,6 +124,17 @@ class PageLoader extends Controller
             "titleData" => $titleData,
             "channels" => $allChannels,
             "channel_ids_with_rights" => $cidsWRights
+        ]);
+
+    }
+
+    function add_new_channel() {
+        
+        $allManagers = Manager::all();
+
+        $this->page_loader("add_new_channel",[
+            "title" => "Add New Channel",
+            "managers" => $allManagers
         ]);
 
     }
@@ -190,6 +212,9 @@ class PageLoader extends Controller
                 $titles = DB::select($query);
             
                 $titles = json_decode(json_encode($titles),TRUE);
+
+                Cache::put("channel-".$channelId,$titles);
+
             }
                 
 

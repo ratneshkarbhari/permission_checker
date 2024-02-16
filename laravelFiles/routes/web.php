@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Titles;
+use App\Http\Controllers\Channels;
 use App\Http\Controllers\PageLoader;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authentication;
@@ -56,8 +57,13 @@ Route::group(['middleware' => ['ip_checker']], function () {
    
         Route::post("create-title-exe",[Titles::class,'create']);
 
+        Route::get("add-new-channel",[PageLoader::class,'add_new_channel']);
+      
+        Route::post("create-new-channel-exe",[Channels::class,'create']);
 
+        Route::get("edit-channel/{id}",[PageLoader::class,'edit_channel']);
         
+
     });
 
 

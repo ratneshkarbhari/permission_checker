@@ -229,6 +229,9 @@
                             </li>
                             @else
                             <li class="">
+                                <a href="{{ url('/') }}" class="">Dashboard</a>
+                            </li>
+                            <li class="">
                                 <a href="{{ url('manage-channels') }}" class="">Channels</a>
                             </li>
                             <li class="">
