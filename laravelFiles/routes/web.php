@@ -72,6 +72,8 @@ Route::group(['middleware' => ['ip_checker']], function () {
 
         Route::post("create-manager-exe",[Managers::class,'create']);
 
+        Route::post("update-manager-exe",[Managers::class,'update']);
+
     });
 
 

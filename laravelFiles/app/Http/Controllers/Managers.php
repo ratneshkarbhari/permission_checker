@@ -74,6 +74,9 @@ class Managers extends Controller
             $ptPassword = md5($request->email);
             $passwordHash = password_hash($ptPassword,PASSWORD_DEFAULT);
 
+            if(is_null($request->is_gm)){
+                $request->is_gm = 0;
+            }
 
             if ($managerData->update([
                     "name" => $request->name,

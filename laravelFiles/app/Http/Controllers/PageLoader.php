@@ -108,7 +108,8 @@ class PageLoader extends Controller
         if($managerData){
 
             $this->page_loader("edit_manager",[
-
+                "title" => "Edit Manager",
+                "manager"=>$managerData
             ]);
 
         }else{
