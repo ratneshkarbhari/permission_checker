@@ -103,6 +103,8 @@ class PageLoader extends Controller
     
     
     function edit_manager($id){
+
+        exit;
         
         $managerData = Manager::find($id);
         if($managerData){

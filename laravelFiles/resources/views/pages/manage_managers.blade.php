@@ -19,7 +19,7 @@
                         <td>{{$manager["group_code"]}}</td>
 
                         <td>
-                            <a href="{{url('edit-manager/'.$manager['id'])}}" class="btn btn-secondary">Edit</a>
+                            <!-- <a href="{{url('edit-manager/'.$manager['id'])}}" class="btn btn-secondary">Edit</a> -->
                         </td>
                         
                     </tr>   
