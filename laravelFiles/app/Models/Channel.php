@@ -10,7 +10,7 @@ class Channel extends Model
 {
     use HasFactory;
 
-    protected $protected = [];
+    protected $guarded = [];
 
     protected $table = "channels";
 

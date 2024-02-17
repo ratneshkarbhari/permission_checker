@@ -62,6 +62,8 @@ Route::group(['middleware' => ['ip_checker']], function () {
         Route::post("create-new-channel-exe",[Channels::class,'create']);
 
         Route::get("edit-channel/{id}",[PageLoader::class,'edit_channel']);
+
+        Route::post("update-channel-exe",[Channels::class,'update']);
         
 
     });

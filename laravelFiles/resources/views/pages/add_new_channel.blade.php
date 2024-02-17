@@ -57,7 +57,6 @@
             url: action,
             data: formData,
             success: function (response) {
-                console.log(response);
                 if (response.result=="success") {
                     $("span#success-toast-message").html("Channel created successfully");
                     $(".success-toast").toast("show");

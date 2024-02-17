@@ -91,10 +91,12 @@ class PageLoader extends Controller
     function edit_channel($id){
         
         $channelData = Channel::find($id);
+        $allManagers = Manager::all();
 
         $this->page_loader("edit_channel",[
             "title" => "Edit channel : ".$channelData['name'],
-            "channel" => $channelData
+            "channel" => $channelData,
+            "managers" => $allManagers
         ]);
 
     }
