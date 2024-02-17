@@ -6,6 +6,7 @@ use App\Http\Controllers\PageLoader;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authentication;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\Managers;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageBreak;
 
 /*
@@ -65,6 +66,11 @@ Route::group(['middleware' => ['ip_checker']], function () {
 
         Route::post("update-channel-exe",[Channels::class,'update']);
         
+        Route::get("edit-manager/{id}",[PageLoader::class,'edit_manager']);
+
+        Route::get("add-new-manager",[PageLoader::class,'add_new_manager']);
+
+        Route::post("create-manager-exe",[Managers::class,'create']);
 
     });
 

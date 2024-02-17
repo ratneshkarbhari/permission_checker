@@ -101,6 +101,33 @@ class PageLoader extends Controller
 
     }
     
+    
+    function edit_manager($id){
+        
+        $managerData = Manager::find($id);
+        if($managerData){
+
+            $this->page_loader("edit_manager",[
+
+            ]);
+
+        }else{
+   
+            return redirect()->to(url("manage-managers"));
+            
+        }
+
+    }
+
+    function add_new_manager(){
+        
+       
+        $this->page_loader("add_new_manager",[
+            "title"=>"Add New Manager"
+        ]);
+        
+
+    }
 
     function edit_title($id) {
         

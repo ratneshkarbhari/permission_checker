@@ -3,10 +3,6 @@
 
         <h1 class="page-title">{{$title}}</h1>
 
-        <p class="text-success" id="success-message"></p>
-
-        <p class="text-danger" id="error-message"></p>
-
         <form enctype="multipart/form-data" action="{{ url('create-title-exe') }}" id="createTitleForm" method="post">
 
             @csrf
