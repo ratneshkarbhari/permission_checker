@@ -45,7 +45,9 @@ Route::group(['middleware' => ['ip_checker']], function () {
         Route::post("upload-data-exe",[DataController::class,'upload']);
     
         Route::get("manage-channels",[PageLoader::class,'manage_channels']);
-    
+   
+        Route::get("channel-titles/{id}",[PageLoader::class,'channel_titles']);
+        
         Route::get("manage-managers",[PageLoader::class,'manage_managers']);
     
         Route::get("manage-titles",[PageLoader::class,'manage_titles']);

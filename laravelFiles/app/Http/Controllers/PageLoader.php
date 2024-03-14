@@ -171,6 +171,47 @@ class PageLoader extends Controller
 
     }
 
+    function channel_titles($id) {
+
+        if(session("user_type")!="rights-admin"){
+            return redirect()->to(url("/"));
+        }
+
+        $heroChannel = Channel::where("id",$id)->with("manager_data")->first();
+
+
+        if($heroChannel){
+
+
+            if(!$titles = Cache::get("channel-".$id)){
+                $query = 'select DISTINCT t.name,t.full_movie,t.scene,t.song,t.grading,t.lot,t.language,t.yor,t.cast from titles t, channel_permissions cp, channels c where t.id = cp.title_id and cp.channel_id = '.$id;
+        
+                $titles = DB::select($query);
+            
+                $titles = json_decode(json_encode($titles),TRUE);
+
+                Cache::put("channel-".$id,$titles);
+
+            }
+                
+
+       
+
+            
+            $this->page_loader("channel_permitted_titles",[
+                "title" => "Titles allowed for channel",
+                "allowed_titles" => $titles,
+                "channel"=>$heroChannel
+            ]);
+
+
+        }else{
+
+            return redirect()->to(url("/"));
+
+        }
+    }
+
     function manage_channels() {
         
         $channels = Channel::with("manager_data")->get();

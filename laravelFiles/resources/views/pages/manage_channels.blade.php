@@ -17,7 +17,7 @@
 
                     @foreach($channels as $channel)
                     <tr>
-                        <td>{{$channel["name"]}}</td>
+                        <td><a href="{{url('channel-titles/'.$channel['id'])}}">{{$channel["name"]}}</a></td>
                         <td>{{$channel["yt_id"]}}</td>
                         <td><a href="{{url('manager-details/'.$channel['manager_data']['id'])}}">{{$channel["manager_data"]["name"]}}</a></td>
                         <td>
